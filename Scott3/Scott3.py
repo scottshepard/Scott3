@@ -24,7 +24,9 @@ class Scott3:
         if bucket_name is None:
             bucket_name=self.bucket
         self.client.download_file(bucket_name, s3_filename, 'df.csv')
-        return pd.read_csv('df.csv')
+        df = pd.read_csv('df.csv')
+        os.remove('df.csv')
+        return df
 
     def read_json(self, s3_filename, bucket_name=None):
         if bucket_name is None:
@@ -32,6 +34,7 @@ class Scott3:
         self.client.download_file(bucket_name, s3_filename, 'dict.json')
         with open('dict.json', 'r') as f:
             output_dict = json.load(f)
+        os.remove('dict.json')
         return output_dict
 
     def write_csv(self, df, s3_filename, bucket_name=None):
@@ -39,6 +42,7 @@ class Scott3:
             bucket_name=self.bucket
         df.to_csv('df.csv', index=False)
         self.client.upload_file('df.csv', bucket_name, s3_filename)
+        os.remove('df.csv')
 
     def write_json(self, dictionary, s3_filename, bucket_name=None):
         if bucket_name is None:
@@ -47,3 +51,4 @@ class Scott3:
         with open('dict.json', 'w') as f:
             f.write(json_output)
         self.client.upload_file('dict.json', bucket_name, s3_filename)
+        os.remove('dict.json')
