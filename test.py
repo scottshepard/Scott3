@@ -1,6 +1,6 @@
 import pdb
 import pandas as pd
-from Scott3.scott3 import Scott3
+from Scott3.Scott3 import Scott3
 import yaml
     
 with open('config.yml', 'r') as stream:
