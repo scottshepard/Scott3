@@ -14,4 +14,14 @@ your IAM user credientals.
 
     cp config.yml.example config.yml
 
+Install the Scott3 package locally
+
+    pip install -e .
+
+## Testing
+
+Run the test script
+
+    python test.py
+
 
