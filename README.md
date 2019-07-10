@@ -14,14 +14,11 @@ your IAM user credientals.
 
     cp config.yml.example config.yml
 
-Install the Scott3 package locally
-
-    pip install -e .
-
 ## Testing
 
 Run the test script
 
     python test.py
 
-
+The test script uses all four functions. It writes to a bucket in both JSON and
+CSV formats, then reads that file back down and compares it.
