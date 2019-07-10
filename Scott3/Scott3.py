@@ -6,23 +6,13 @@ import yaml
 
 class Scott3:
 
-    def __init__(self, config_file = '../config.yml'):
+    def __init__(self, aws_access_key_id, aws_secret_access_key, default_bucket):
 
-        if isinstance(config_file, str):
-            self.credentials = self.load_credentials(config_file)
-        elif isinstance(config_file, dict):
-            self.credentials = config_file
-
-        self.bucket = self.credentials['default_bucket']
+        self.bucket = default_bucket
         self.client = boto3.client(
             's3', 
-            aws_access_key_id = self.credentials['aws_access_key_id'],
-            aws_secret_access_key = self.credentials['aws_secret_access_key'])
-
-    def load_credentials(self, file):
-        with open(file, 'r') as stream:
-            data_loaded = yaml.safe_load(stream)
-        return data_loaded
+            aws_access_key_id = aws_access_key_id,
+            aws_secret_access_key = aws_secret_access_key)
 
     def read_csv(self, s3_filename, bucket_name=None):
         if bucket_name is None:
